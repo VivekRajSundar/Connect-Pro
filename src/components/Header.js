@@ -95,7 +95,7 @@ const Content = styled.div`
 `;
 
 const Logo = styled.span`
-  margin: 8px;
+  margin-right: 8px;
   font-size: 0px;
 `;
 

@@ -6,10 +6,11 @@ import { Navigate } from "react-router-dom";
 const Login = (props) => {
   return (
     <Container>
-      {props && <Navigate to="/home" />}
+      {/* {props && <Navigate to="/home" />} */}
       <Nav>
         <a href="">
-          <img src="/images/login-logo.svg" alt="logo" />
+          {/* <img src="/images/login-logo.svg" alt="logo" /> */}
+          <img src="/images/connectpro_logo.webp" alt="logo" />
         </a>
         <div>
           <Join>Join now</Join>
@@ -50,8 +51,16 @@ const Nav = styled.nav`
     width: 135px;
     height: 34px;
 
+    img {
+      width: 324px;
+    }
+
     @media (max-width: 768px) {
       padding: 0 5px;
+
+      img {
+        width: 214px;
+      }
     }
   }
 `;

@@ -6,7 +6,7 @@ import { Navigate } from "react-router-dom";
 const Login = (props) => {
   return (
     <Container>
-      {/* {props && <Navigate to="/home" />} */}
+      {props && <Navigate to="/home" />}
       <Nav>
         <a href="">
           {/* <img src="/images/login-logo.svg" alt="logo" /> */}

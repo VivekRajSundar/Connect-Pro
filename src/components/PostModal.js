@@ -3,49 +3,58 @@ import { useState } from "react";
 
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
-  return (
-    <Container>
-      <Content>
-        <Header>
-          <h2>Create a post</h2>
-          <button>
-            <img src="/images/close-icon.png" alt="close icon" />
-          </button>
-        </Header>
-        <SharedContent>
-          <UserInfo>
-            <img src="/images/user.svg" />
-            <span>Name</span>
-          </UserInfo>
-          <Editor>
-            <textarea
-              value={editorText}
-              onChange={(e) => setEditorText(e.target.value)}
-              placeholder="What do you want to talk about?"
-              autoFocus={true}
-            ></textarea>
-          </Editor>
-        </SharedContent>
-        <ShareCreation>
-          <AttachAssets>
-            <AssetButton>
-              <img src="/images/share-image.png" alt="share image" />
-            </AssetButton>
-            <AssetButton>
-              <img src="/images/share-video.png" alt="share video" />
-            </AssetButton>
-          </AttachAssets>
-          <ShareComment>
-            <AssetButton>
-              <img src="/images/share-comment.png" alt="share comment" />
-              Anyone
-            </AssetButton>
-          </ShareComment>
 
-          <PostButton>Post</PostButton>
-        </ShareCreation>
-      </Content>
-    </Container>
+  const reset = (e) => {
+    setEditorText("");
+    props.handleClick(e);
+  };
+  return (
+    <>
+      {props.showModal === "open" && (
+        <Container>
+          <Content>
+            <Header>
+              <h2>Create a post</h2>
+              <button onClick={(event) => reset(event)}>
+                <img src="/images/close-icon.png" alt="close icon" />
+              </button>
+            </Header>
+            <SharedContent>
+              <UserInfo>
+                <img src="/images/user.svg" />
+                <span>Name</span>
+              </UserInfo>
+              <Editor>
+                <textarea
+                  value={editorText}
+                  onChange={(e) => setEditorText(e.target.value)}
+                  placeholder="What do you want to talk about?"
+                  autoFocus={true}
+                ></textarea>
+              </Editor>
+            </SharedContent>
+            <ShareCreation>
+              <AttachAssets>
+                <AssetButton>
+                  <img src="/images/share-image.png" alt="share image" />
+                </AssetButton>
+                <AssetButton>
+                  <img src="/images/share-video.png" alt="share video" />
+                </AssetButton>
+              </AttachAssets>
+              <ShareComment>
+                <AssetButton>
+                  <img src="/images/share-comment.png" alt="share comment" />
+                  Anyone
+                </AssetButton>
+              </ShareComment>
+
+              <PostButton>Post</PostButton>
+            </ShareCreation>
+          </Content>
+        </Container>
+      )}
+    </>
   );
 };
 

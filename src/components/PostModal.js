@@ -2,6 +2,9 @@ import styled from "styled-components";
 import { useState } from "react";
 import ReactPlayer from "react-player";
 import { connect } from "react-redux";
+import firebaseApp from "../firebase";
+import { getFirestore } from "firebase/firestore/lite";
+import { postArticleAPI } from "../actions";
 
 const PostModal = (props) => {
   const [editorText, setEditorText] = useState("");
@@ -24,6 +27,27 @@ const PostModal = (props) => {
     setShareImage("");
     setVideoLink("");
     setAssetArea(area);
+  };
+
+  const postArticle = (e) => {
+    e.preventDefault();
+    if (e.target !== e.currentTarget) {
+      return;
+    }
+    console.log(props.user);
+    console.log(getFirestore(firebaseApp).Timestamp.now());
+    const payload = {
+      image: shareImage,
+      video: videoLink,
+      //  user: props.user,
+      description: editorText,
+      //timestamp: getFirestore(firebaseApp).Timestamp.now(),
+    };
+    console.log(payload);
+    console.log("cool bro");
+
+    props.postArticle(payload);
+    reset(e);
   };
 
   const reset = (e) => {
@@ -110,7 +134,10 @@ const PostModal = (props) => {
                 </AssetButton>
               </ShareComment>
 
-              <PostButton disabled={!editorText ? true : false}>
+              <PostButton
+                disabled={!editorText ? true : false}
+                onClick={(event) => postArticle(event)}
+              >
                 Post
               </PostButton>
             </ShareCreation>
@@ -280,5 +307,7 @@ const mapStateToProps = (state) => {
   };
 };
 
-const mapDispatchToProps = (dispatch) => ({});
+const mapDispatchToProps = (dispatch) => ({
+  postArticle: (payload) => dispatch(postArticleAPI(payload)),
+});
 export default connect(mapStateToProps, mapDispatchToProps)(PostModal);
